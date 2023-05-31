@@ -1,0 +1,22 @@
+{
+    "builders": [
+        {
+            "type": "virtualbox-iso",
+            "guest_os_type": "Linux_64",
+            "iso_url": "https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-virt-3.17.2-x86_64.iso",
+            "iso_checksum": "96cd5a0a372b75e9d8607d2df8c3e604326f5c314c8c4f760ff901447a9a7746",
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
+            "http_directory": "http",
+            "shutdown_command": "poweroff",
+            "boot_wait": "10s",
+            "boot_keygroup_interval": "1s",
+            "boot_command": [
+                "<enter><wait10>",
+                "root<enter><wait>",
+                "ifconfig eth0 up && udhcpc -i eth0<enter><wait>",
+                "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/answers<enter><wait>"
+            ]
+        }
+    ]
+}
